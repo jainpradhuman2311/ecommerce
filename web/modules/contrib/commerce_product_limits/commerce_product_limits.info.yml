@@ -1,0 +1,13 @@
+name: 'Commerce Product Limits'
+type: module
+description: 'Adds minimum and maximum quantity purchase limits to product variations.'
+package: 'Commerce (contrib)'
+core_version_requirement: ^8.8 || ^9 || ^10 || ^11
+dependencies:
+  - commerce:commerce_cart
+  - commerce:commerce_product
+
+# Information added by Drupal.org packaging script on 2024-08-22
+version: '1.0.3'
+project: 'commerce_product_limits'
+datestamp: 1724335395

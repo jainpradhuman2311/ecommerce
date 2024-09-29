@@ -1,0 +1,8 @@
+{
+    "require": {
+        "square/square-php-sdk": {
+            "version" : "34.0",
+            "url": "https://github.com/square/square-php-sdk/archive/refs/tags/34.0.1.20240118.zip"
+        }
+    }
+}

@@ -1,0 +1,16 @@
+name: Commerce AvaTax
+description: Avalara AvaTax integration for Drupal Commerce.
+package: Commerce (contrib)
+type: module
+core_version_requirement: ^9.3 || ^10.1 || ^11
+configure: commerce_avatax.config_settings
+dependencies:
+  - commerce:commerce
+  - commerce:commerce_order
+  - commerce:commerce_store
+  - commerce:commerce_tax
+
+# Information added by Drupal.org packaging script on 2024-09-06
+version: '8.x-1.2'
+project: 'commerce_avatax'
+datestamp: 1725635356

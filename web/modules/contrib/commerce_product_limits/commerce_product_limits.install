@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for Commerce Product Limits module.
+ */
+
+use Drupal\field\Entity\FieldStorageConfig;
+
+/**
+ * Implements hook_update_N().
+ */
+function commerce_product_limits_update_9001() {
+  // First we need to know the name of the db_table.
+  $database = \Drupal::database();
+  $storage_schema = \Drupal::keyValue('entity.storage_schema.sql');
+  $config_factory = \Drupal::configFactory();
+  $array_of_fields_to_change = [
+    'commerce_product_variation.field_schema_data.minimum_order_quantity' => 'minimum_order_quantity',
+    'commerce_product_variation.field_schema_data.maximum_order_quantity' => 'maximum_order_quantity',
+  ];
+
+  foreach ($array_of_fields_to_change as $storage_key => $field_name) {
+    $field_schema = $storage_schema->get($storage_key);
+    if (!empty($field_schema)) {
+      foreach ($field_schema as $table_name => $data) {
+        $column_name = $field_name . '_value';
+        // The table for some reason doesn't exist, skip updating the schema.
+        if (!$database->schema()->tableExists($table_name)) {
+          continue;
+        }
+        // Resize the column.
+        $database->query("ALTER TABLE {$table_name} MODIFY {$column_name} INT(10) UNSIGNED NOT NULL");
+        // Update storage schema.
+        $field_schema[$table_name]['fields'][$column_name]['size'] = 'normal';
+        $storage_schema->set($storage_key, $field_schema);
+        $config = $config_factory->getEditable("field.storage.commerce_product_variation.{$field_name}");
+        $config->set('settings.size', 'normal');
+        $config->save(TRUE);
+        FieldStorageConfig::loadByName('commerce_product_variation', $field_name)->save();
+      }
+    }
+  }
+}

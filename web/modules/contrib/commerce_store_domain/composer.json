@@ -1,0 +1,14 @@
+{
+  "name": "drupal/commerce_store_domain",
+  "type": "drupal-module",
+  "description": "Supports specifying a store's domain",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev",
+  "require": {
+      "drupal/commerce": "~2 || ^3"
+  },
+  "require-dev": {
+      "drupal/domain": "2.0.x-dev"
+  }
+}

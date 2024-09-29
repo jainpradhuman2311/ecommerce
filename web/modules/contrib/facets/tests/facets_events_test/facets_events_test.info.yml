@@ -1,0 +1,10 @@
+name: 'Facets events test'
+type: module
+description: 'Facets events test'
+package: 'Testing'
+hidden: true
+
+# Information added by Drupal.org packaging script on 2024-08-07
+version: '2.0.8'
+project: 'facets'
+datestamp: 1723040929
